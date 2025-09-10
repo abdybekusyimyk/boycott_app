@@ -1,4 +1,4 @@
-import 'package:boycott_app/models/bottom_bar/view/bottom_bar.dart';
+import 'package:boycott_app/modules/bottom_bar/view/bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
