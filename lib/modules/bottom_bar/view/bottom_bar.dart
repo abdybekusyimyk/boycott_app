@@ -51,28 +51,44 @@ class _BottomBarState extends State<BottomBar> {
               width: 6,
               height: 6,
               child: DecoratedBox(
-                decoration: BoxDecoration(color: AppColor.green, shape: BoxShape.circle),
+                decoration: BoxDecoration(
+                  color: AppColor.green,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
         ],
       ),
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(
-        shadow: const BoxShadow(color: Color.fromARGB(81, 161, 209, 162), blurRadius: 28, offset: Offset(1, 1)),
+        shadow: const BoxShadow(
+          color: Color.fromARGB(81, 161, 209, 162),
+          blurRadius: 28,
+          offset: Offset(1, 1),
+        ),
         itemCount: 2,
         tabBuilder: (int index, bool isActive) {
-          IconData icon = index == 0 ? Icons.home_outlined : Icons.person_outlined;
+          IconData icon = index == 0
+              ? Icons.home_outlined
+              : Icons.person_outlined;
           final active = (_currentIndex != 2) && (index == _tabIndex);
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 24, color: active ? AppColor.green : AppColor.grey),
+              Icon(
+                icon,
+                size: 24,
+                color: active ? AppColor.green : AppColor.grey,
+              ),
               const SizedBox(height: 4),
               if (active)
                 SizedBox(
                   width: 6,
                   height: 6,
                   child: DecoratedBox(
-                    decoration: BoxDecoration(color: AppColor.green, shape: BoxShape.circle),
+                    decoration: BoxDecoration(
+                      color: AppColor.green,
+                      shape: BoxShape.circle,
+                    ),
                   ),
                 ),
             ],

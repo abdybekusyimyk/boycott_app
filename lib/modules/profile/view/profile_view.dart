@@ -5,6 +5,6 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("Profile", style: TextStyle(fontSize: 23));
+    return Center(child: Text("Profile", style: TextStyle(fontSize: 23)));
   }
 }
