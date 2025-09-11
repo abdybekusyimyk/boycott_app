@@ -9,74 +9,90 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.backgroundColor,
-      appBar: AppBar(elevation: 0),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-        child: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: AppColor.grengrey,
-                hintText: "Search",
-                suffixIcon: Icon(CupertinoIcons.search),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(17),
+      backgroundColor: AppColor.white,
+      appBar: AppBar(
+        backgroundColor: AppColor.white,
+        forceMaterialTransparency: true,
+        title: Text('Boycott product', style: AppTypography.red22w500),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 8),
+              TextField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: AppColor.grengrey,
+                  hintText: "Search",
+                  suffixIcon: Icon(CupertinoIcons.search),
+                  border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(17)),
                 ),
               ),
-            ),
-            SizedBox(height: 5),
-            Expanded(
-              child: GridView.builder(
-                itemCount: 10,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
-                ),
-                itemBuilder: (context, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: AppColor.grengrey,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          top: 5,
-                          left: 5,
-                          child: Transform.rotate(
-                            angle: -0.5, // radian (taxminan -23 gradus)
-                            child: Text(
-                              'Boycott',
-                              style: AppTypography.red14w300,
+              SizedBox(height: 8),
+              Expanded(
+                child: GridView.builder(
+                  itemCount: 10,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 10,
+                    mainAxisExtent: 200,
+                  ),
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColor.grengrey,
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(16), bottom: Radius.circular(2)),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.network(
+                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkXru0DLnN64t041_JeP-1tqAdJAlzGHkvcg&s',
+                              width: double.infinity,
+                              height: 100,
+                              fit: BoxFit.contain,
                             ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("assets/images/baycott.png"),
-                              SizedBox(height: 15),
-                              Text(
-                                "https:api.boycottisraeli.bi...",
-                                style: AppTypography.black12w300,
-                                maxLines: 1,
+                            Spacer(flex: 2),
+                            Center(
+                              child: Text(
+                                'Product Name',
+                                style: AppTypography.black14,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                            ],
-                          ),
+                            ),
+                            Spacer(),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                color: Colors.transparent,
+                                width: double.infinity,
+                                padding: EdgeInsets.all(2),
+                                child: Text(
+                                  'https://milo.com.au/',
+                                  style: AppTypography.black14Underline,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
-                },
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
