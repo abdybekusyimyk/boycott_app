@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColor.white,
         forceMaterialTransparency: true,
-        title: Text('Boycott product', style: AppTypography.red22w500),
+        title: Text('Boycott product', style: AppTypography.black22w500),
       ),
       body: SafeArea(
         child: Padding(
@@ -28,7 +28,10 @@ class HomeView extends StatelessWidget {
                   fillColor: AppColor.grengrey,
                   hintText: "Search",
                   suffixIcon: Icon(CupertinoIcons.search),
-                  border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(17)),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(17),
+                  ),
                 ),
               ),
               SizedBox(height: 8),
@@ -48,7 +51,10 @@ class HomeView extends StatelessWidget {
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           color: AppColor.grengrey,
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(16), bottom: Radius.circular(2)),
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(16),
+                            bottom: Radius.circular(2),
+                          ),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
