@@ -1,3 +1,5 @@
+import 'package:boycott_app/modules/home/data/local_data.dart';
+import 'package:boycott_app/modules/home/model/models.dart';
 import 'package:boycott_app/theme/colors/app_colors.dart';
 import 'package:boycott_app/theme/typography/app_typography.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,7 +39,7 @@ class HomeView extends StatelessWidget {
               SizedBox(height: 8),
               Expanded(
                 child: GridView.builder(
-                  itemCount: 10,
+                  itemCount: localProducts.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 12,
@@ -45,6 +47,7 @@ class HomeView extends StatelessWidget {
                     mainAxisExtent: 200,
                   ),
                   itemBuilder: (context, index) {
+                    final Product product = localProducts[index];
                     return GestureDetector(
                       onTap: () {},
                       child: Container(
@@ -61,7 +64,7 @@ class HomeView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Image.network(
-                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkXru0DLnN64t041_JeP-1tqAdJAlzGHkvcg&s',
+                              product.logo.url,
                               width: double.infinity,
                               height: 100,
                               fit: BoxFit.contain,
@@ -69,7 +72,7 @@ class HomeView extends StatelessWidget {
                             Spacer(flex: 2),
                             Center(
                               child: Text(
-                                'Product Name',
+                                product.name,
                                 style: AppTypography.black14,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -83,7 +86,7 @@ class HomeView extends StatelessWidget {
                                 width: double.infinity,
                                 padding: EdgeInsets.all(2),
                                 child: Text(
-                                  'https://milo.com.au/',
+                                  product.website,
                                   style: AppTypography.black14Underline,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
