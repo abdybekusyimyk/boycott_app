@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColor.white,
         forceMaterialTransparency: true,
-        title: Text('Boycott product', style: AppTypography.red22w500),
+        title: Text('Boycott product', style: AppTypography.black22w500),
       ),
       body: SafeArea(
         child: Padding(
@@ -55,15 +55,15 @@ class HomeView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Image.network(
-                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkXru0DLnN64t041_JeP-1tqAdJAlzGHkvcg&s',
+                              'https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE=',
                               width: double.infinity,
                               height: 100,
-                              fit: BoxFit.contain,
+                              fit: BoxFit.cover,
                             ),
                             Spacer(flex: 2),
                             Center(
                               child: Text(
-                                'Product Name',
+                                'name',
                                 style: AppTypography.black14,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -77,7 +77,7 @@ class HomeView extends StatelessWidget {
                                 width: double.infinity,
                                 padding: EdgeInsets.all(2),
                                 child: Text(
-                                  'https://milo.com.au/',
+                                  'website',
                                   style: AppTypography.black14Underline,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
