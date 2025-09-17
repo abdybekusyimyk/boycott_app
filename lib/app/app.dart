@@ -1,4 +1,4 @@
-import 'package:boycott_app/modules/bottom_bar/view/bottom_bar.dart';
+import 'package:boycott_app/modules/splash/view/splash_view.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -6,6 +6,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: BottomBar(), debugShowCheckedModeBanner: false);
+    return MaterialApp(home: SplashView(), debugShowCheckedModeBanner: false);
   }
 }
