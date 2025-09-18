@@ -1,4 +1,4 @@
-import 'package:boycott_app/modules/onboarding/onboarding_controller/controller.dart';
+import 'package:boycott_app/modules/onboarding/view/onboarding_view.dart';
 import 'package:boycott_app/theme/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +28,8 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
 
     Future.delayed(_navigateDelay, () {
       if (mounted) {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const OnboardingScreen()));
+        // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const OnboardingScreen()));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const OnboardingView()));
       }
     });
   }
