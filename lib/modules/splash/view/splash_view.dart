@@ -1,4 +1,4 @@
-import 'package:boycott_app/modules/onboarding/view/onboarding_one_view.dart';
+import 'package:boycott_app/modules/onboarding/onboarding_controller/controller.dart';
 import 'package:flutter/material.dart';
 
 class SplashView extends StatefulWidget {
@@ -29,7 +29,7 @@ class _SplashViewState extends State<SplashView>
       Navigator.of(
         // ignore: use_build_context_synchronously
         context,
-      ).pushReplacement(MaterialPageRoute(builder: (_) => OnboardingOneView()));
+      ).pushReplacement(MaterialPageRoute(builder: (_) => OnboardingScreen()));
     });
   }
 
