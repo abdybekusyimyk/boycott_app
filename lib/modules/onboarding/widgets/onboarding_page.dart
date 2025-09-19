@@ -29,11 +29,24 @@ class OnboardingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
-              Image.network(imageUrl, width: 400, height: 310, fit: BoxFit.cover),
+              Image.network(
+                imageUrl,
+                width: 400,
+                height: 310,
+                fit: BoxFit.cover,
+              ),
               const SizedBox(height: 30),
-              Text(title, textAlign: TextAlign.center, style: AppTypography.black32w600),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: AppTypography.black32w600,
+              ),
               const SizedBox(height: 15),
-              Text(subtitle, textAlign: TextAlign.center, style: AppTypography.darkgrey20w400),
+              Text(
+                subtitle,
+                textAlign: TextAlign.center,
+                style: AppTypography.darkgrey20w400,
+              ),
               const Spacer(),
               GestureDetector(
                 onTap: onNext,
@@ -41,8 +54,15 @@ class OnboardingPage extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(13),
                   margin: const EdgeInsets.symmetric(horizontal: 30),
-                  decoration: BoxDecoration(color: AppColor.darkindigo, borderRadius: BorderRadius.circular(15)),
-                  child: Text(buttonText, textAlign: TextAlign.center, style: AppTypography.white16w400),
+                  decoration: BoxDecoration(
+                    color: AppColor.darkindigo,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Text(
+                    buttonText,
+                    textAlign: TextAlign.center,
+                    style: AppTypography.white16w400,
+                  ),
                 ),
               ),
             ],
