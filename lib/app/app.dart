@@ -6,6 +6,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: BottomBar(), debugShowCheckedModeBanner: false);
+    return MaterialApp(title: 'Boycott App', debugShowCheckedModeBanner: false, home: BottomBar());
   }
 }

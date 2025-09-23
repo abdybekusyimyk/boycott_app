@@ -18,4 +18,22 @@ class AppTypography {
     fontSize: 22,
     fontWeight: FontWeight.w500,
   );
+
+  static final black32w600 = TextStyle(
+    color: AppColor.black,
+    fontSize: 32,
+    fontWeight: FontWeight.w600,
+  );
+
+  static final darkgrey20w400 = TextStyle(
+    color: AppColor.darkgrey,
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
+  );
+
+  static final white16w400 = TextStyle(
+    color: AppColor.white,
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+  );
 }
