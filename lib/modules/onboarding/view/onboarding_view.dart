@@ -29,21 +29,24 @@ class _OnboardingViewState extends State<OnboardingView> {
                     imageUrl:
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWhGaXXvGu7v97A69MpKe8StnDjb1N-auqTQ&s",
                     title: "Welcome to your\ncrypto marketplace",
-                    subtitle: "We are your first and quickest bet to finding cryptocurrencies and Nft tokens",
+                    subtitle:
+                        "We are your first and quickest bet to finding cryptocurrencies and Nft tokens",
                     buttonText: "Next",
                   ),
                   OnboardingPage(
                     imageUrl:
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQENf9nmeSiuaSOhJSLOlmJxuk_X5EI8nCQMg&s",
                     title: "Buy and sell the best\nin the cryptoverse",
-                    subtitle: "We are your first and quickest bet to finding cryptocurrencies and Nft tokens",
+                    subtitle:
+                        "We are your first and quickest bet to finding cryptocurrencies and Nft tokens",
                     buttonText: "Next",
                   ),
                   OnboardingPage(
                     imageUrl:
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomnWxzDqX1z8h_BviCFTc0EF1TyRCFECN7w&s",
                     title: "Buy and sell the best\nin the cryptoverse",
-                    subtitle: "Bitcoin, Dodge coin. We got you covered. Shop all you want and need right here.",
+                    subtitle:
+                        "Bitcoin, Dodge coin. We got you covered. Shop all you want and need right here.",
                     buttonText: "Get Started",
                   ),
                 ],
@@ -53,7 +56,11 @@ class _OnboardingViewState extends State<OnboardingView> {
             SmoothPageIndicator(
               controller: _controller,
               count: 3,
-              effect: const WormEffect(dotHeight: 10, dotWidth: 10, activeDotColor: Colors.indigo),
+              effect: const WormEffect(
+                dotHeight: 10,
+                dotWidth: 10,
+                activeDotColor: Colors.indigo,
+              ),
             ),
             SizedBox(height: 16),
             GestureDetector(
@@ -68,10 +75,15 @@ class _OnboardingViewState extends State<OnboardingView> {
                 width: double.infinity,
                 height: 50,
                 margin: const EdgeInsets.symmetric(horizontal: 16),
-                decoration: BoxDecoration(color: AppColor.darkindigo, borderRadius: BorderRadius.circular(15)),
+                decoration: BoxDecoration(
+                  color: AppColor.darkindigo,
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: Center(
                   child: Text(
-                    _controller.hasClients && _controller.page == 2 ? "Get Started" : "Next",
+                    _controller.hasClients && _controller.page == 2
+                        ? "Get Started"
+                        : "Next",
                     style: AppTypography.white16w400,
                   ),
                 ),
@@ -86,9 +98,15 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   void nextPage() {
     if (_controller.hasClients) {
-      _controller.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+      _controller.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
     }
   }
 
-  void goToHome() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const BottomBar()));
+  void goToHome() => Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (_) => const BottomBar()),
+  );
 }
