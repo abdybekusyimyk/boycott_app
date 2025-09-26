@@ -1,3 +1,4 @@
+import 'package:boycott_app/modules/product/product_view.dart';
 import 'package:boycott_app/theme/colors/app_colors.dart';
 import 'package:boycott_app/theme/typography/app_typography.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,7 +29,10 @@ class HomeView extends StatelessWidget {
                   fillColor: AppColor.grengrey,
                   hintText: "Search",
                   suffixIcon: Icon(CupertinoIcons.search),
-                  border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(17)),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(17),
+                  ),
                 ),
               ),
               SizedBox(height: 8),
@@ -43,12 +47,22 @@ class HomeView extends StatelessWidget {
                   ),
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductView(),
+                          ),
+                        );
+                      },
                       child: Container(
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           color: AppColor.grengrey,
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(16), bottom: Radius.circular(2)),
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(16),
+                            bottom: Radius.circular(2),
+                          ),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,

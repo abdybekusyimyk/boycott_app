@@ -36,4 +36,38 @@ class AppTypography {
     fontSize: 16,
     fontWeight: FontWeight.w400,
   );
+
+  static final darkgreenopacity16w600 = TextStyle(
+    color: AppColor.darkgrey,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+  );
+
+  static final darkgreenopacity16w400 = TextStyle(
+    color: AppColor.darkgrey,
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+  );
+
+  static final black18w700 = TextStyle(
+    color: AppColor.black,
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+  );
+  static final black18w400 = TextStyle(
+    color: AppColor.black,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+  );
+  static final whiteopcity16w600 = TextStyle(
+    color: AppColor.white,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+  );
+
+  static final brightBlue20w500 = TextStyle(
+    color: AppColor.brightBlue,
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+  );
 }
