@@ -19,21 +19,37 @@ class AppTypography {
     fontWeight: FontWeight.w500,
   );
 
-  static final black32w600 = TextStyle(
-    color: AppColor.black,
+  static final freshgreen32w700 = TextStyle(
+    color: AppColor.freshgreen,
     fontSize: 32,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w700,
   );
 
-  static final darkgrey20w400 = TextStyle(
-    color: AppColor.darkgrey,
+  static final darkgreen22w500 = TextStyle(
+    color: AppColor.darkgreen,
+    fontSize: 22,
+    fontWeight: FontWeight.w500,
+  );
+
+  static final lightgray20w400 = TextStyle(
+    color: AppColor.lightgray,
     fontSize: 20,
     fontWeight: FontWeight.w400,
   );
 
-  static final white16w400 = TextStyle(
-    color: AppColor.white,
+  static final darkgreenopacity16w400 = TextStyle(
+    color: AppColor.darkgreenopacity,
     fontSize: 16,
     fontWeight: FontWeight.w400,
+  );
+  static final darkgreenopacity16w600 = TextStyle(
+    color: AppColor.darkgreenopacity,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+  );
+  static final whiteopcity16w600 = TextStyle(
+    color: AppColor.whiteopcity,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
   );
 }

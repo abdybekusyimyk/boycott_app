@@ -11,4 +11,9 @@ class AppColor {
   static Color blue = Colors.blue;
   static Color darkgrey = Color(0xFF3C3C3C);
   static Color darkindigo = Color(0xFF11024D);
+  static Color darkgreen = Color(0xff2F9E44);
+  static Color darkgreenopacity = Color(0xE02F9E44);
+  static Color freshgreen = Color(0xff2F9E44);
+  static Color lightgray = Color(0xffB0B0B0);
+  static Color whiteopcity = Color(0xE0FFFFFF);
 }

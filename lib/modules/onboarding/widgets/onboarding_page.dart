@@ -2,14 +2,14 @@ import 'package:boycott_app/theme/typography/app_typography.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingPage extends StatelessWidget {
-  final String imageUrl;
+  final String images;
   final String title;
   final String subtitle;
   final String buttonText;
 
   const OnboardingPage({
     super.key,
-    required this.imageUrl,
+    required this.images,
     required this.title,
     required this.subtitle,
     required this.buttonText,
@@ -20,16 +20,24 @@ class OnboardingPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(child: Image.network(imageUrl, fit: BoxFit.cover)),
+        Expanded(child: Image.asset(images, fit: BoxFit.contain)),
         const SizedBox(height: 32),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(title, textAlign: TextAlign.center, style: AppTypography.black32w600),
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: AppTypography.freshgreen32w700,
+          ),
         ),
         const SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(subtitle, textAlign: TextAlign.center, style: AppTypography.darkgrey20w400),
+          child: Text(
+            subtitle,
+            textAlign: TextAlign.center,
+            style: AppTypography.lightgray20w400,
+          ),
         ),
       ],
     );
