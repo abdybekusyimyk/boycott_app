@@ -10,13 +10,12 @@ class SplashView extends StatefulWidget {
   State<SplashView> createState() => _SplashViewState();
 }
 
-class _SplashViewState extends State<SplashView>
-    with SingleTickerProviderStateMixin {
+class _SplashViewState extends State<SplashView> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _animation;
 
-  static const _splashDuration = Duration(seconds: 3);
-  static const _navigateDelay = Duration(seconds: 3);
+  static const _splashDuration = Duration(milliseconds: 1500);
+  static const _navigateDelay = Duration(milliseconds: 1500);
 
   @override
   void initState() {
@@ -30,9 +29,7 @@ class _SplashViewState extends State<SplashView>
 
     Future.delayed(_navigateDelay, () {
       if (mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => const OnboardingView()),
-        );
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const OnboardingView()));
       }
     });
   }
@@ -49,10 +46,7 @@ class _SplashViewState extends State<SplashView>
             scale: _animation,
             child: SizedBox.square(
               dimension: 80,
-              child: Image.asset(
-                "assets/images/splash.image.png",
-                fit: BoxFit.contain,
-              ),
+              child: Image.asset("assets/images/splash.image.png", fit: BoxFit.contain),
             ),
           ),
           Spacer(),
