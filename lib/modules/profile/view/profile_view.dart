@@ -12,12 +12,16 @@ class ProfileView extends StatelessWidget {
       backgroundColor: AppColor.white,
       appBar: AppBar(
         backgroundColor: AppColor.white,
-        title: Text("Profile", style: AppTypography.black22w500),
+        title: Text("Profile", style: AppTypography.darkGray22w600),
       ),
       body: Column(
         children: [
           SizedBox(height: 8),
-          ButtonProfile(icon: Icons.info_outline, title: "About us", onTap: () {}),
+          ButtonProfile(
+            icon: Icons.info_outline,
+            title: "About us",
+            onTap: () {},
+          ),
           SizedBox(height: 12),
           ButtonProfile(icon: Icons.share, title: "Share", onTap: () {}),
           SizedBox(height: 12),
