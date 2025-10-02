@@ -65,4 +65,9 @@ class AppTypography {
     fontWeight: FontWeight.w600,
     color: AppColor.colorwhite88,
   );
+  static final darkblueblack16w600 = TextStyle(
+    color: AppColor.darkblueblack,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+  );
 }
