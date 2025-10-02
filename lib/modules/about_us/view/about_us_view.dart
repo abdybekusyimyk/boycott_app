@@ -18,8 +18,8 @@ class AboutUsView extends StatelessWidget {
           },
         ),
         backgroundColor: AppColor.white,
-        elevation: 0,
         title: Text('About us', style: AppTypography.darkGray22w600),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),

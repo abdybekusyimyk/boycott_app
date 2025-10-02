@@ -20,6 +20,7 @@ class FeedbackView extends StatelessWidget {
         backgroundColor: AppColor.white,
         elevation: 0,
         title: Text('Feedback', style: AppTypography.darkGray22w600),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

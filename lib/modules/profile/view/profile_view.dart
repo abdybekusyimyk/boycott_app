@@ -21,9 +21,8 @@ class _ProfileViewState extends State<ProfileView> {
       backgroundColor: AppColor.white,
       appBar: AppBar(
         backgroundColor: AppColor.white,
-        title: Center(
-          child: Text("Profile", style: AppTypography.darkGray22w600),
-        ),
+        title: Text("Profile", style: AppTypography.darkGray22w600),
+        centerTitle: true,
       ),
       body: Column(
         children: [
@@ -57,72 +56,73 @@ class _ProfileViewState extends State<ProfileView> {
             title: "Language",
             trailingText: selectedLanguage,
             onTap: () {
-              showModalBottomSheet(
-                backgroundColor: Colors.transparent,
-                context: context,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                ),
-                builder: (context) {
-                  return Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColor.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text(
-                              "Language",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          // English
-                          RadioListTile<String>(
-                            title: Text("English"),
-                            value: "English",
-                            // ignore: deprecated_member_use
-                            groupValue: selectedLanguage,
-                            // ignore: deprecated_member_use
-                            onChanged: (value) {
-                              setState(() {
-                                selectedLanguage = value!;
-                              });
-                              Navigator.pop(context);
-                            },
-                          ),
-                          // Kyrgyz
-                          RadioListTile<String>(
-                            title: Text("Kyrgyz"),
-                            value: "Kyrgyz",
-                            // ignore: deprecated_member_use
-                            groupValue: selectedLanguage,
-                            // ignore: deprecated_member_use
-                            onChanged: (value) {
-                              setState(() {
-                                selectedLanguage = value!;
-                              });
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              );
+              _showLanguageBottomSheet(context);
             },
           ),
         ],
       ),
+    );
+  }
+
+  void _showLanguageBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColor.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    "Language",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                // English
+                RadioListTile<String>(
+                  title: Text("English"),
+                  value: "English",
+                  // ignore: deprecated_member_use
+                  groupValue: selectedLanguage,
+                  // ignore: deprecated_member_use
+                  onChanged: (value) {
+                    setState(() {
+                      selectedLanguage = value!;
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
+                // Kyrgyz
+                RadioListTile<String>(
+                  title: Text("Kyrgyz"),
+                  value: "Kyrgyz",
+                  // ignore: deprecated_member_use
+                  groupValue: selectedLanguage,
+                  // ignore: deprecated_member_use
+                  onChanged: (value) {
+                    setState(() {
+                      selectedLanguage = value!;
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
