@@ -20,16 +20,24 @@ class OnboardingPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(child: Image.network(imageUrl, fit: BoxFit.cover)),
+        Image.asset(imageUrl, fit: BoxFit.cover),
         const SizedBox(height: 32),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(title, textAlign: TextAlign.center, style: AppTypography.black32w600),
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: AppTypography.darkGreen24w500,
+          ),
         ),
         const SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(subtitle, textAlign: TextAlign.center, style: AppTypography.darkgrey20w400),
+          child: Text(
+            subtitle,
+            textAlign: TextAlign.center,
+            style: AppTypography.gray18w400,
+          ),
         ),
       ],
     );

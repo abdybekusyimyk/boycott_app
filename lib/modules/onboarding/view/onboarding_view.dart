@@ -1,7 +1,6 @@
 import 'package:boycott_app/modules/bottom_bar/view/bottom_bar.dart';
+import 'package:boycott_app/modules/onboarding/widgets/onboarding_buttons.dart';
 import 'package:boycott_app/modules/onboarding/widgets/onboarding_page.dart';
-import 'package:boycott_app/theme/colors/app_colors.dart';
-import 'package:boycott_app/theme/typography/app_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -24,26 +23,28 @@ class _OnboardingViewState extends State<OnboardingView> {
             Expanded(
               child: PageView(
                 controller: _controller,
+                onPageChanged: (_) {
+                  setState(() {}); // sahifa o‘zgarganda tugmalar yangilanadi
+                },
                 children: [
                   OnboardingPage(
-                    imageUrl:
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWhGaXXvGu7v97A69MpKe8StnDjb1N-auqTQ&s",
-                    title: "Welcome to your\ncrypto marketplace",
-                    subtitle: "We are your first and quickest bet to finding cryptocurrencies and Nft tokens",
+                    imageUrl: "assets/images/flagone.png",
+                    title: "Choose with Heart",
+                    subtitle:
+                        "Every conscious refusal of a product is a step toward justice.",
                     buttonText: "Next",
                   ),
                   OnboardingPage(
-                    imageUrl:
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQENf9nmeSiuaSOhJSLOlmJxuk_X5EI8nCQMg&s",
-                    title: "Buy and sell the best\nin the cryptoverse",
-                    subtitle: "We are your first and quickest bet to finding cryptocurrencies and Nft tokens",
+                    imageUrl: "assets/images/flagtwo.png",
+                    title: "Together We Are Stronger",
+                    subtitle:
+                        "When millions take small steps, the world begins to change.",
                     buttonText: "Next",
                   ),
                   OnboardingPage(
-                    imageUrl:
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomnWxzDqX1z8h_BviCFTc0EF1TyRCFECN7w&s",
-                    title: "Buy and sell the best\nin the cryptoverse",
-                    subtitle: "Bitcoin, Dodge coin. We got you covered. Shop all you want and need right here.",
+                    imageUrl: "assets/images/flagthree.png",
+                    title: "Start Right Now",
+                    subtitle: "Your step matters. Join the movement today.",
                     buttonText: "Get Started",
                   ),
                 ],
@@ -53,29 +54,17 @@ class _OnboardingViewState extends State<OnboardingView> {
             SmoothPageIndicator(
               controller: _controller,
               count: 3,
-              effect: const WormEffect(dotHeight: 10, dotWidth: 10, activeDotColor: Colors.indigo),
+              effect: const WormEffect(
+                dotHeight: 10,
+                dotWidth: 10,
+                activeDotColor: Colors.indigo,
+              ),
             ),
             SizedBox(height: 16),
-            GestureDetector(
-              onTap: () {
-                if (_controller.page == 2) {
-                  goToHome();
-                } else {
-                  nextPage();
-                }
-              },
-              child: Container(
-                width: double.infinity,
-                height: 50,
-                margin: const EdgeInsets.symmetric(horizontal: 16),
-                decoration: BoxDecoration(color: AppColor.darkindigo, borderRadius: BorderRadius.circular(15)),
-                child: Center(
-                  child: Text(
-                    _controller.hasClients && _controller.page == 2 ? "Get Started" : "Next",
-                    style: AppTypography.white16w400,
-                  ),
-                ),
-              ),
+            OnboardingButtons(
+              page: _controller.hasClients ? _controller.page?.round() ?? 0 : 0,
+              nextPage: nextPage,
+              goToHome: goToHome,
             ),
             SizedBox(height: 16),
           ],
@@ -86,9 +75,15 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   void nextPage() {
     if (_controller.hasClients) {
-      _controller.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+      _controller.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
     }
   }
 
-  void goToHome() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const BottomBar()));
+  void goToHome() => Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (_) => const BottomBar()),
+  );
 }
