@@ -15,6 +15,7 @@ class HomeView extends StatelessWidget {
         backgroundColor: AppColor.white,
         forceMaterialTransparency: true,
         title: Text('Boycott product', style: AppTypography.black22w500),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: Padding(
