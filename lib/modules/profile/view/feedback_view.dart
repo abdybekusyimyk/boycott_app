@@ -29,11 +29,7 @@ class FeedbackView extends StatelessWidget {
             Center(
               child: Text(
                 "We value your opinion",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: AppColor.darkGray, // Matn rangini yaxshiladik
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: AppColor.darkGray),
               ),
             ),
             const SizedBox(height: 12),
@@ -41,21 +37,13 @@ class FeedbackView extends StatelessWidget {
               alignment: Alignment.bottomRight,
               children: [
                 Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Color(
-                      0xFFD3D3D3,
-                    ), // TextField fon rangi, ko‘zga qulay
-                  ),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Color(0xFFD3D3D3)),
                   child: TextField(
                     maxLines: 4,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Enter your feedback here',
-                      hintStyle: TextStyle(
-                        color: AppColor.darkGray,
-                        fontSize: 16,
-                      ),
+                      hintStyle: TextStyle(color: AppColor.darkGray, fontSize: 16),
                       contentPadding: const EdgeInsets.all(16.0),
                     ),
                     style: TextStyle(color: AppColor.darkGray, fontSize: 16),
@@ -67,9 +55,7 @@ class FeedbackView extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {
-                  print("Feedback sent");
-                },
+                onPressed: () {},
                 child: Text("Send", style: AppTypography.darkGray22w600),
               ),
             ),
