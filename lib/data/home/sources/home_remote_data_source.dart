@@ -1,44 +1,33 @@
-// import 'dart:developer';
+import 'dart:developer';
 
-// import 'package:boycott_app/data/home/models/home.dart';
-// import 'package:boycott_app/data/home/sources/home_data_source.dart';
-// import 'package:dio/dio.dart';
-// import 'package:flutter/foundation.dart';
+import 'package:boycott_app/data/home/models/companies_model.dart';
+import 'package:boycott_app/data/home/sources/home_data_source.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
-// @immutable
-// final class HomeRemoteDataSource implements HomeDataSource {
-//   const HomeRemoteDataSource();
+@immutable
+final class HomeRemoteDataSource implements HomeDataSource {
+  const HomeRemoteDataSource(this.dio);
 
-//   static const String baseUrl = 'https://api.boycottisraeli.biz/v1';
+  final Dio dio;
 
-//   // @override
-//   // Future<HomeModel> getHome() async {
-//   //   try {
-//   //     final dio = Dio(
-//   //       BaseOptions(
-//   //         baseUrl: baseUrl,
-//   //         connectTimeout: const Duration(seconds: 10),
-//   //         receiveTimeout: const Duration(seconds: 10),
-//   //         headers: {'Accept': 'application/json'},
-//   //       ),
-//   //     );
-
-//   //     final response = await dio.get('/companies', queryParameters: {'limit': 4, 'offset': 2});
-
-//   //     if (response.statusCode == 200) {
-//   //       log('✅ Response OK: ${response.statusCode}');
-//   //       final data = response.data['data'] as List<dynamic>;
-//   //       return HomeModel.fromJson({'companies': data});
-//   //     } else {
-//   //       log('⚠️ Error: ${response.statusCode}');
-//   //       throw Exception('Failed to fetch data');
-//   //     }
-//   //   } on DioException catch (e, s) {
-//   //     log('🔥 Dio error: ${e.message}\n$s');
-//   //     rethrow;
-//   //   } catch (e, s) {
-//   //     log('🔥 Unknown error: $e\n$s');
-//   //     rethrow;
-//   //   }
-//   // }
-// }
+  //! test code
+  @override
+  Future<CompaniesModel> getCompanies() async {
+    try {
+      final res = await dio.get(
+        '/companies',
+        // queryParameters: {'limit': 1, 'offset': 0},
+        // options: Options(headers: {'accept': 'application/json'}),
+      );
+      if (res.statusCode == 200) {
+        log('✅ OK: ${res.statusCode}');
+        return CompaniesModel.fromJson(res.data);
+      }
+      throw Exception(' ⚠️ Failed: ${res.statusCode}');
+    } catch (e) {
+      log('🔥 Error: $e');
+      rethrow;
+    }
+  }
+}

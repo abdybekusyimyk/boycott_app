@@ -1,7 +1,7 @@
 abstract class ApiConst {
   ///
-  static const baseLink = 'https://www.agi.kg/';
+  static const baseLink = 'https://api.boycottisraeli.biz/v1';
 
   ///
-  static const offerLinkRU = 'URl';
+  // static const companies = 'companies?limit=1&offset=0';
 }
