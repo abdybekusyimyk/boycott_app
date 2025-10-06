@@ -2,6 +2,7 @@ import 'package:boycott_app/modules/bottom_bar/view/bottom_bar.dart';
 import 'package:boycott_app/modules/onboarding/widgets/onboarding_buttons.dart';
 import 'package:boycott_app/modules/onboarding/widgets/onboarding_page.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingView extends StatefulWidget {
@@ -24,21 +25,19 @@ class _OnboardingViewState extends State<OnboardingView> {
               child: PageView(
                 controller: _controller,
                 onPageChanged: (_) {
-                  setState(() {}); // sahifa o‘zgarganda tugmalar yangilanadi
+                  setState(() {});
                 },
                 children: [
                   OnboardingPage(
                     imageUrl: "assets/images/flagone.png",
                     title: "Choose with Heart",
-                    subtitle:
-                        "Every conscious refusal of a product is a step toward justice.",
+                    subtitle: "Every conscious refusal of a product is a step toward justice.",
                     buttonText: "Next",
                   ),
                   OnboardingPage(
                     imageUrl: "assets/images/flagtwo.png",
                     title: "Together We Are Stronger",
-                    subtitle:
-                        "When millions take small steps, the world begins to change.",
+                    subtitle: "When millions take small steps, the world begins to change.",
                     buttonText: "Next",
                   ),
                   OnboardingPage(
@@ -54,11 +53,7 @@ class _OnboardingViewState extends State<OnboardingView> {
             SmoothPageIndicator(
               controller: _controller,
               count: 3,
-              effect: const WormEffect(
-                dotHeight: 10,
-                dotWidth: 10,
-                activeDotColor: Colors.indigo,
-              ),
+              effect: const WormEffect(dotHeight: 10, dotWidth: 10, activeDotColor: Colors.indigo),
             ),
             SizedBox(height: 16),
             OnboardingButtons(
@@ -75,15 +70,16 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   void nextPage() {
     if (_controller.hasClients) {
-      _controller.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
+      _controller.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
     }
   }
 
-  void goToHome() => Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(builder: (_) => const BottomBar()),
-  );
+  void goToHome() async {
+    var splashBox = await Hive.openBox('splashBox');
+    await splashBox.put('splashBox', true);
+
+    if (mounted) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const BottomBar()));
+    }
+  }
 }
