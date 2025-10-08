@@ -1,4 +1,4 @@
-import 'package:boycott_app/modules/product/view/product_view.dart';
+import 'package:boycott_app/modules/home/view/product_view.dart';
 import 'package:boycott_app/theme/colors/app_colors.dart';
 import 'package:boycott_app/theme/typography/app_typography.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,7 +44,7 @@ class HomeView extends StatelessWidget {
                     crossAxisCount: 2,
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 10,
-                    mainAxisExtent: 200,
+                    mainAxisExtent: 190,
                   ),
                   itemBuilder: (context, index) {
                     return GestureDetector(
@@ -57,17 +57,22 @@ class HomeView extends StatelessWidget {
                         );
                       },
                       child: Container(
+                        margin: EdgeInsets.all(2),
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           color: AppColor.grengrey,
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(16),
-                            bottom: Radius.circular(2),
-                          ),
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColor.shadowColor,
+                              offset: Offset(0, 2),
+                              blurRadius: 10,
+                              spreadRadius: 0,
+                            ),
+                          ],
                         ),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Image.network(
                               'https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE=',
@@ -75,28 +80,12 @@ class HomeView extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            Spacer(flex: 2),
                             Center(
                               child: Text(
-                                'name',
+                                'Coca-Cola',
                                 style: AppTypography.black14,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            Spacer(),
-                            GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                color: Colors.transparent,
-                                width: double.infinity,
-                                padding: EdgeInsets.all(2),
-                                child: Text(
-                                  'website',
-                                  style: AppTypography.black14Underline,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
                               ),
                             ),
                           ],
