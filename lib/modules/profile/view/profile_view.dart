@@ -31,7 +31,10 @@ class _ProfileViewState extends State<ProfileView> {
             icon: Icons.info_outline,
             title: "About us",
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutUsView()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutUsView()),
+              );
             },
           ),
           SizedBox(height: 12),
@@ -41,7 +44,10 @@ class _ProfileViewState extends State<ProfileView> {
             icon: Icons.feedback,
             title: "Feedback",
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const FeedbackView()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FeedbackView()),
+              );
             },
           ),
           SizedBox(height: 12),
@@ -50,7 +56,7 @@ class _ProfileViewState extends State<ProfileView> {
             title: "Language",
             trailingText: selectedLanguage,
             onTap: () {
-              _showLanguageBottomSheet(context);
+              _showLanguageDialog(context);
             },
           ),
         ],
@@ -58,47 +64,48 @@ class _ProfileViewState extends State<ProfileView> {
     );
   }
 
-  void _showLanguageBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      backgroundColor: Colors.transparent,
+  void _showLanguageDialog(BuildContext context) {
+    showDialog(
       context: context,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Container(
-            decoration: BoxDecoration(color: AppColor.white, borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text("Language", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                ),
-                RadioListTile<String>(
-                  title: Text("English"),
-                  value: "English",
-                  groupValue: selectedLanguage,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedLanguage = value!;
-                    });
-                    Navigator.pop(context);
-                  },
-                ),
-                RadioListTile<String>(
-                  title: Text("Kyrgyz"),
-                  value: "Kyrgyz",
-                  groupValue: selectedLanguage,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedLanguage = value!;
-                    });
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: Material(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment
+                    .start, // <-- bir chiziqda startdan boshlaydi
+                children: [
+                  Text(
+                    "Language",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  RadioListTile<String>(
+                    contentPadding: EdgeInsets.zero, // <-- chetlar yo‘q
+                    title: Text("English"),
+                    value: "English",
+                    groupValue: selectedLanguage,
+                    onChanged: (value) {
+                      setState(() => selectedLanguage = value!);
+                      Navigator.pop(context);
+                    },
+                  ),
+                  RadioListTile<String>(
+                    contentPadding: EdgeInsets.zero, // <-- chetlar yo‘q
+                    title: Text("Kyrgyz"),
+                    value: "Kyrgyz",
+                    groupValue: selectedLanguage,
+                    onChanged: (value) {
+                      setState(() => selectedLanguage = value!);
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         );

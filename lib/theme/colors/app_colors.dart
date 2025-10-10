@@ -17,4 +17,5 @@ class AppColor {
   static const Color darkGreen89 = Color(0xE32F9E44);
   static const Color darkGray = Color(0xFF13151A);
   static Color darkblueblack = Color.fromARGB(220, 4, 7, 14);
+  static const Color shadowColor = Color(0x26000000);
 }
