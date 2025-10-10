@@ -11,21 +11,15 @@ class TabContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
-            child: Image.asset(
-              "assets/images/pngimg.com - cocacola_PNG10 (2).png",
+            child: Image.network(
+              "https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE=",
               height: 150,
             ),
           ),
           const SizedBox(height: 24),
-          const Text(
-            "Coca-Cola",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
+          const Text("Coca-Cola", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
-          const Text(
-            "Soft Drink",
-            style: TextStyle(fontSize: 16, color: Colors.grey),
-          ),
+          const Text("Soft Drink", style: TextStyle(fontSize: 16, color: Colors.grey)),
           const SizedBox(height: 16),
           const Text(
             "Horlicks is a sweet malted milk hot drink powder developed by founders James and William Horlick. "
@@ -36,11 +30,7 @@ class TabContent extends StatelessWidget {
           GestureDetector(
             child: const Text(
               "https://www.coca-cola.com/kg/ru",
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.blue,
-                decoration: TextDecoration.underline,
-              ),
+              style: TextStyle(fontSize: 16, color: Colors.blue, decoration: TextDecoration.underline),
             ),
           ),
         ],

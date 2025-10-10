@@ -27,13 +27,10 @@ class HomeView extends StatelessWidget {
               TextField(
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: AppColor.grengrey,
+                  fillColor: AppColor.red,
                   hintText: "Search",
                   suffixIcon: Icon(CupertinoIcons.search),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(17),
-                  ),
+                  border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(12)),
                 ),
               ),
               SizedBox(height: 8),
@@ -49,27 +46,15 @@ class HomeView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ProductView(),
-                          ),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ProductView()));
                       },
                       child: Container(
                         margin: EdgeInsets.all(2),
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: AppColor.grengrey,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColor.shadowColor,
-                              offset: Offset(0, 2),
-                              blurRadius: 10,
-                              spreadRadius: 0,
-                            ),
-                          ],
+                          color: AppColor.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.3), blurRadius: 4)],
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
