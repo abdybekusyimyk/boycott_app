@@ -1,7 +1,11 @@
+import 'package:boycott_app/data/home/models/companies_data_model.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TabContent extends StatelessWidget {
-  const TabContent({super.key});
+  const TabContent({super.key, required this.companiesDataModel});
+
+  final CompaniesDataModel companiesDataModel;
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +21,24 @@ class TabContent extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          const Text("Coca-Cola", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          Text(companiesDataModel.name.toString(), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
           const Text("Soft Drink", style: TextStyle(fontSize: 16, color: Colors.grey)),
           const SizedBox(height: 16),
-          const Text(
-            "Horlicks is a sweet malted milk hot drink powder developed by founders James and William Horlick. "
-            "It was first sold as \"Horlick's Infant and Invalids Food\", soon adding \"aged and travellers\" to their label",
-            style: TextStyle(fontSize: 16),
-          ),
+          Text(companiesDataModel.description.toString(), style: TextStyle(fontSize: 16)),
           const SizedBox(height: 24),
           GestureDetector(
-            child: const Text(
-              "https://www.coca-cola.com/kg/ru",
+            onTap: () async {
+              final url = Uri.parse(companiesDataModel.website ?? '');
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url, mode: LaunchMode.externalApplication);
+              } else {
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Could not launch website')));
+              }
+            },
+            child: Text(
+              companiesDataModel.website.toString(),
               style: TextStyle(fontSize: 16, color: Colors.blue, decoration: TextDecoration.underline),
             ),
           ),

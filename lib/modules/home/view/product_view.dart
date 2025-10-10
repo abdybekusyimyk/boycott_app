@@ -1,10 +1,13 @@
+import 'package:boycott_app/data/home/models/companies_data_model.dart';
 import 'package:boycott_app/modules/home/widgets/tab_content.dart';
 import 'package:boycott_app/theme/colors/app_colors.dart';
 import 'package:boycott_app/theme/typography/app_typography.dart';
 import 'package:flutter/material.dart';
 
 class ProductView extends StatelessWidget {
-  const ProductView({super.key});
+  const ProductView({super.key, required this.companiesDataModel});
+
+  final CompaniesDataModel companiesDataModel;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,14 @@ class ProductView extends StatelessWidget {
             ),
           ),
         ),
-        body: TabBarView(children: [TabContent(), TabContent()]),
+        body: TabBarView(
+          children: [
+            TabContent(companiesDataModel: companiesDataModel),
+
+            //! add list view builder
+            TabContent(companiesDataModel: companiesDataModel),
+          ],
+        ),
       ),
     );
   }
