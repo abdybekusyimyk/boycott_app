@@ -1,3 +1,4 @@
+import 'package:boycott_app/companents/snackbar/app_snackbar.dart';
 import 'package:boycott_app/data/home/models/alternatives_model.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,7 +15,7 @@ class AlternativesTab extends StatelessWidget {
       return const Center(child: Text('No alternatives available'));
     }
     return ListView.builder(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       itemCount: alternatives.length,
       itemBuilder: (context, index) {
         final alt = alternatives[index];
@@ -22,19 +23,10 @@ class AlternativesTab extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: LogoImage(
-                url: alt.logo?.url,
-                type: alt.logo?.type,
-                height: 150,
-                width: double.infinity,
-                fit: BoxFit.contain,
-              ),
+              child: LogoImage(url: alt.logo?.url, type: alt.logo?.type, height: 150, fit: BoxFit.contain),
             ),
             const SizedBox(height: 24),
-            Text(
-              alt.name ?? "",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
+            Text(alt.name ?? "", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Text(alt.description ?? '', style: TextStyle(fontSize: 16)),
             const SizedBox(height: 8),
@@ -44,24 +36,25 @@ class AlternativesTab extends StatelessWidget {
                 if (await canLaunchUrl(url)) {
                   await launchUrl(url, mode: LaunchMode.externalApplication);
                 } else {
-                  // ignore: use_build_context_synchronously
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Could not launch website')),
-                  );
+                  if (context.mounted) {
+                    AppSnackbar.showError(context: context, title: 'Could not launch website');
+                  }
                 }
               },
               child: Text(
-                alt.website ?? '',
+                alt.website.toString(),
+                maxLines: 1,
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.blue,
                   decoration: TextDecoration.underline,
-                ),
+                  decorationColor: Colors.blue,
+                ).copyWith(overflow: TextOverflow.ellipsis),
               ),
             ),
-            SizedBox(height: 5),
-            Divider(color: Colors.black.withValues(alpha: 0.3), height: 5),
-            SizedBox(height: 5),
+            const SizedBox(height: 16),
+            Divider(),
+            const SizedBox(height: 16),
           ],
         );
       },

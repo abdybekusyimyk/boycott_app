@@ -21,14 +21,17 @@ class HomeCubit extends Cubit<HomeState> {
       emit(HomeError(e));
     }
   }
-//
+
   Future<void> searchCompanies(String query) async {
-    if (query.trim().isEmpty) {
-      return getCompanies();
+    if (query.isEmpty) {
+      getCompanies();
+      return;
     }
+
     emit(const HomeLoading());
     try {
-      final response = await repository.searchCompanies(query.trim());
+      final response = await repository.searchCompanies(query);
+
       emit(HomeSuccess(response));
     } catch (e, s) {
       log('⚠️ HomeCubit -> searchCompanies $e \n $s');
