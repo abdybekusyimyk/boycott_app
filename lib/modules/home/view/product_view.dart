@@ -1,4 +1,5 @@
 import 'package:boycott_app/data/home/models/companies_data_model.dart';
+import 'package:boycott_app/modules/home/widgets/alternatives_tab.dart';
 import 'package:boycott_app/modules/home/widgets/tab_content.dart';
 import 'package:boycott_app/theme/colors/app_colors.dart';
 import 'package:boycott_app/theme/typography/app_typography.dart';
@@ -26,12 +27,20 @@ class ProductView extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                 color: AppColor.white,
-                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.3), blurRadius: 4)],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.3),
+                    blurRadius: 4,
+                  ),
+                ],
                 borderRadius: BorderRadius.circular(30),
               ),
               child: TabBar(
                 indicatorPadding: const EdgeInsets.all(4),
-                indicator: BoxDecoration(color: AppColor.green, borderRadius: BorderRadius.circular(30)),
+                indicator: BoxDecoration(
+                  color: AppColor.green,
+                  borderRadius: BorderRadius.circular(30),
+                ),
                 overlayColor: const WidgetStatePropertyAll(Colors.transparent),
                 indicatorSize: TabBarIndicatorSize.tab,
                 dividerHeight: 0,
@@ -49,9 +58,9 @@ class ProductView extends StatelessWidget {
         body: TabBarView(
           children: [
             TabContent(companiesDataModel: companiesDataModel),
-
-            //! add list view builder
-            TabContent(companiesDataModel: companiesDataModel),
+            AlternativesTab(
+              alternatives: companiesDataModel.alternatives ?? [],
+            ),
           ],
         ),
       ),

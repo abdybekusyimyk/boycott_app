@@ -14,4 +14,10 @@ final class HomeRepositoryImpl implements HomeRepository {
     final data = await dataSource.getCompanies();
     return data;
   }
+//
+  @override
+  Future<CompaniesModel> searchCompanies(String query) async {
+    final data = await dataSource.searchCompanies(query);
+    return data;
+  }
 }

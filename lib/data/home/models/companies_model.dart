@@ -12,7 +12,6 @@ final class CompaniesModel {
   factory CompaniesModel.fromJson(Map<String, dynamic> json) => _$CompaniesModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$CompaniesModelToJson(this);
-
   final int code;
   final String status;
   final List<CompaniesDataModel> data;

@@ -16,6 +16,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     final cubit = context.read<HomeCubit>();
@@ -42,20 +43,48 @@ class _HomeViewState extends State<HomeView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 8),
-              TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: AppColor.red,
-                  hintText: "Search",
-                  suffixIcon: Icon(CupertinoIcons.search),
-                  border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(12)),
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.3),
+                      blurRadius: 4,
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  controller: _controller, // Controller qo‘shish shart
+                  onSubmitted: (query) {
+                    // Enter bosilganda qidiruv
+                    context.read<HomeCubit>().searchCompanies(query);
+                  },
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: AppColor.white,
+                    hintText: "Search",
+                    suffixIcon: IconButton(
+                      icon: const Icon(CupertinoIcons.search),
+                      onPressed: () {
+                        // TextField ichidagi matn bo‘yicha qidiruv
+                        final query = _controller.text;
+                        context.read<HomeCubit>().searchCompanies(query);
+                      },
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
                 ),
               ),
               SizedBox(height: 8),
               BlocBuilder<HomeCubit, HomeState>(
                 builder: (context, state) {
                   return switch (state) {
-                    HomeInitial() || HomeLoading() => const Center(child: CircularProgressIndicator()),
+                    HomeInitial() || HomeLoading() => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                     HomeSuccess() => Expanded(
                       child: GridView.builder(
                         itemCount: state.companiesModel.data.length,
@@ -70,7 +99,10 @@ class _HomeViewState extends State<HomeView> {
                           return GestureDetector(
                             onTap: () => Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => ProductView(companiesDataModel: company)),
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ProductView(companiesDataModel: company),
+                              ),
                             ),
                             child: Container(
                               margin: EdgeInsets.all(2),
@@ -78,23 +110,23 @@ class _HomeViewState extends State<HomeView> {
                               decoration: BoxDecoration(
                                 color: AppColor.white,
                                 borderRadius: BorderRadius.circular(12),
-                                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.3), blurRadius: 4)],
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withValues(alpha: 0.3),
+                                    blurRadius: 4,
+                                  ),
+                                ],
                               ),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
-                                  Image.network(
-                                    'https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE=',
-                                    width: double.infinity,
+                                  LogoImage(
+                                    url: company.logo?.url,
+                                    type: company.logo?.type,
                                     height: 100,
-                                    fit: BoxFit.cover,
+                                    width: double.infinity,
                                   ),
-                                  // LogoImage(
-                                  //   url: company.logo?.url,
-                                  //   type: company.logo?.type,
-                                  //   height: 100,
-                                  //   width: double.infinity,
-                                  // ),
                                   Center(
                                     child: Text(
                                       company.name!,
@@ -110,7 +142,9 @@ class _HomeViewState extends State<HomeView> {
                         },
                       ),
                     ),
-                    HomeError() => Center(child: Text(state.exception.toString())),
+                    HomeError() => Center(
+                      child: Text(state.exception.toString()),
+                    ),
                   };
                 },
               ),
@@ -148,13 +182,19 @@ class LogoImage extends StatelessWidget {
 
     // SVG format
     if (type == 'image/svg+xml' || url!.endsWith('.svg')) {
-      return SvgPicture.network(
-        url!,
-        width: width,
-        height: height,
-        fit: fit,
-        placeholderBuilder: (context) => const Center(child: CircularProgressIndicator()),
-      );
+      try {
+        return SvgPicture.network(
+          url!,
+          width: width,
+          height: height,
+          fit: fit,
+          placeholderBuilder: (context) =>
+              const Center(child: CircularProgressIndicator()),
+        );
+      } catch (e) {
+        debugPrint('SVG load error: $e');
+        return const Icon(Icons.broken_image, size: 48, color: Colors.grey);
+      }
     }
 
     // Boshqa formatlar (JPEG, PNG, WebP, ...)
@@ -163,8 +203,10 @@ class LogoImage extends StatelessWidget {
       width: width,
       height: height,
       fit: fit,
-      placeholder: (context, _) => const Center(child: CircularProgressIndicator()),
-      errorWidget: (context, _, __) => const Icon(Icons.broken_image, size: 16, color: Colors.grey),
+      placeholder: (context, _) =>
+          const Center(child: CircularProgressIndicator()),
+      errorWidget: (context, _, __) =>
+          const Icon(Icons.broken_image, size: 16, color: Colors.grey),
     );
   }
 }
