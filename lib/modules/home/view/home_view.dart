@@ -16,6 +16,8 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final TextEditingController _controller = TextEditingController();
+
   @override
   void initState() {
     final cubit = context.read<HomeCubit>();
@@ -42,74 +44,94 @@ class _HomeViewState extends State<HomeView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 8),
-              TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: AppColor.red,
-                  hintText: "Search",
-                  suffixIcon: Icon(CupertinoIcons.search),
-                  border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(12)),
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.3), blurRadius: 4)],
+                ),
+                child: TextField(
+                  controller: _controller,
+                  onSubmitted: _performSearch,
+                  onChanged: (query) {
+                    if (query.isEmpty) {
+                      context.read<HomeCubit>().getCompanies();
+                    } else {
+                      _performSearch(query);
+                    }
+                  },
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: AppColor.white,
+                    hintText: "Search",
+                    suffixIcon: IconButton(
+                      onPressed: () => _performSearch(_controller.text),
+                      icon: const Icon(CupertinoIcons.search),
+                    ),
+                    border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(12)),
+                  ),
                 ),
               ),
               SizedBox(height: 8),
               BlocBuilder<HomeCubit, HomeState>(
                 builder: (context, state) {
                   return switch (state) {
-                    HomeInitial() || HomeLoading() => const Center(child: CircularProgressIndicator()),
-                    HomeSuccess() => Expanded(
-                      child: GridView.builder(
-                        itemCount: state.companiesModel.data.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 10,
-                          mainAxisExtent: 190,
-                        ),
-                        itemBuilder: (context, index) {
-                          final company = state.companiesModel.data[index];
-                          return GestureDetector(
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => ProductView(companiesDataModel: company)),
-                            ),
-                            child: Container(
-                              margin: EdgeInsets.all(2),
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: AppColor.white,
-                                borderRadius: BorderRadius.circular(12),
-                                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.3), blurRadius: 4)],
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Image.network(
-                                    'https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE=',
-                                    width: double.infinity,
-                                    height: 100,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  // LogoImage(
-                                  //   url: company.logo?.url,
-                                  //   type: company.logo?.type,
-                                  //   height: 100,
-                                  //   width: double.infinity,
-                                  // ),
-                                  Center(
-                                    child: Text(
-                                      company.name!,
-                                      style: AppTypography.black14,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                    HomeInitial() || HomeLoading() => const Center(
+                      child: Padding(padding: EdgeInsets.only(top: 100), child: CircularProgressIndicator()),
                     ),
+                    HomeSuccess() =>
+                      state.companiesModel.data.isEmpty
+                          ? Center(
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 100),
+                                child: Text('No item', style: AppTypography.darkGreen18w600),
+                              ),
+                            )
+                          : Expanded(
+                              child: GridView.builder(
+                                itemCount: state.companiesModel.data.length,
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 12,
+                                  mainAxisSpacing: 10,
+                                  mainAxisExtent: 190,
+                                ),
+                                padding: EdgeInsets.only(bottom: 30),
+                                itemBuilder: (context, index) {
+                                  final company = state.companiesModel.data[index];
+                                  return GestureDetector(
+                                    onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => ProductView(companiesDataModel: company)),
+                                    ),
+                                    child: Container(
+                                      margin: EdgeInsets.all(2),
+                                      padding: EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        color: AppColor.white,
+                                        borderRadius: BorderRadius.circular(12),
+                                        boxShadow: [
+                                          BoxShadow(color: Colors.black.withValues(alpha: 0.3), blurRadius: 4),
+                                        ],
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [
+                                          LogoImage(url: company.logo?.url, type: company.logo?.type, height: 100),
+                                          Center(
+                                            child: Text(
+                                              company.name!,
+                                              style: AppTypography.black14,
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                     HomeError() => Center(child: Text(state.exception.toString())),
                   };
                 },
@@ -120,9 +142,16 @@ class _HomeViewState extends State<HomeView> {
       ),
     );
   }
+
+  void _performSearch(String query) {
+    final cubit = context.read<HomeCubit>();
+    cubit.searchCompanies(query);
+  }
 }
 
-//! fix error
+const String _kFallbackImageUrl =
+    'https://previews.123rf.com/images/newdesignillustrations/newdesignillustrations1902/newdesignillustrations190203038/116197254-boycott-seal-print-with-corroded-texture-red-vector-rubber-print-of-boycott-caption-with-scratched.jpg';
+
 class LogoImage extends StatelessWidget {
   final String? url;
   final String? type;
@@ -136,35 +165,46 @@ class LogoImage extends StatelessWidget {
     required this.type,
     this.width = double.infinity,
     this.height = 100,
-    this.fit = BoxFit.cover,
+    this.fit = BoxFit.contain,
   });
 
   @override
   Widget build(BuildContext context) {
-    // Agar URL null yoki bo‘sh bo‘lsa — fallback belgisi chiqsin
     if (url == null || url!.isEmpty) {
-      return const Icon(Icons.broken_image, size: 48, color: Colors.grey);
-    }
-
-    // SVG format
-    if (type == 'image/svg+xml' || url!.endsWith('.svg')) {
-      return SvgPicture.network(
-        url!,
+      return CachedNetworkImage(
+        imageUrl: _kFallbackImageUrl,
         width: width,
         height: height,
-        fit: fit,
-        placeholderBuilder: (context) => const Center(child: CircularProgressIndicator()),
+        fit: BoxFit.cover,
+        placeholder: (context, _) => const Center(child: CircularProgressIndicator(strokeWidth: 1)),
+        errorWidget: (context, _, __) => const Icon(Icons.error_outline, size: 20, color: Colors.redAccent),
       );
     }
 
-    // Boshqa formatlar (JPEG, PNG, WebP, ...)
+    final bool isSvg = (type == 'image/svg+xml' || url!.toLowerCase().endsWith('.svg'));
+
+    if (isSvg) {
+      try {
+        return SvgPicture.network(
+          url!,
+          width: width,
+          height: height,
+          fit: fit,
+          placeholderBuilder: (context) => const Center(child: CircularProgressIndicator(strokeWidth: 1)),
+        );
+      } catch (e) {
+        debugPrint('SVG load error: $e. Falling back to default image.');
+        return CachedNetworkImage(imageUrl: _kFallbackImageUrl, width: width, height: height, fit: BoxFit.contain);
+      }
+    }
     return CachedNetworkImage(
       imageUrl: url!,
       width: width,
       height: height,
       fit: fit,
-      placeholder: (context, _) => const Center(child: CircularProgressIndicator()),
-      errorWidget: (context, _, __) => const Icon(Icons.broken_image, size: 16, color: Colors.grey),
+      placeholder: (context, _) => const Center(child: CircularProgressIndicator(strokeWidth: 1)),
+      errorWidget: (context, _, __) =>
+          CachedNetworkImage(imageUrl: _kFallbackImageUrl, width: width, height: height, fit: BoxFit.contain),
     );
   }
 }

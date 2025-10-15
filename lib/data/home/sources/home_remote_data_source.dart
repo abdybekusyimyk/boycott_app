@@ -30,4 +30,31 @@ final class HomeRemoteDataSource implements HomeDataSource {
       rethrow;
     }
   }
+
+  @override
+  Future<CompaniesModel> searchCompanies(String query) async {
+    try {
+      final encodedQuery = Uri.encodeComponent(query);
+
+      final res = await dio.get(
+        '/search/$encodedQuery',
+
+        options: Options(
+          headers: {'accept': 'application/json'},
+          validateStatus: (status) {
+            return status == 200 || status == 404;
+          },
+        ),
+      );
+
+      log('✅ SEARCH OK (Status: ${res.statusCode}): for query: $query');
+      return CompaniesModel.fromJson(res.data);
+    } on DioException catch (e) {
+      log('🔥 Search Dio Error (Dio Status: ${e.response?.statusCode ?? 'N/A'}): $e');
+      rethrow;
+    } catch (e) {
+      log('🔥 General Search Error: $e');
+      rethrow;
+    }
+  }
 }
